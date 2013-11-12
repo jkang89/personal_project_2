@@ -1,0 +1,24 @@
+{% extends 'master.html' %}
+{% block body %}
+
+    <div>
+        <h1>Welcome to Silly with Friends!</h1>
+        <p>Please log in so that we can begin recording fun videos.</p>
+    </div>
+    <form class = "signin" method = "POST">
+        <h3 class = "signin_heading">Please sign in to your account.</h3><br>
+        <input type="text" class="form_control" placeholder="Enter your e-mail address." name = "emailaddress"><br>
+        <input type="password" class = "form_control" placeholder="Please enter your password." name = "password"><br>
+        Not a user? <a href="{{ url_for("register") }}">Register </a>a new account<br>
+        <input type="submit" class="btn btn-lg btn-primary btn-block" value="Submit"><br>
+    </form>
+    <video autoplay></video>
+        <script src="/Desktop/project/static/js/webcam.js"></script>
+        <link href="/static/js/webcam.js" rel="webcam">
+        <button id="startbutton">Take video</button>
+        <canvas id="canvas"></canvas>
+            <!-- does this also take video or just a picture? and do I need to add javascript to get this to work?-->
+            <!-- use this link https://developer.mozilla.org/en-US/docs/WebRTC/Taking_webcam_photos -->
+            <!-- figure out canvas -->
+
+{% endblock %}
