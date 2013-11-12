@@ -36,8 +36,8 @@ class User(Base, UserMixin):
         password = password.encode("utf-8")
         return bcrypt.hashpw(password, self.salt.encode("utf-8")) == self.password
 
-class Post(Base):
-    __tablename__ = "posts"
+class Video_Post(Base):
+    __tablename__ = "videos"
     
     id = Column(Integer, primary_key=True)
     title = Column(String(64), nullable=False)

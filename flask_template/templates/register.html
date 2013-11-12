@@ -1,0 +1,13 @@
+{% extends 'master.html' %}
+{% block body %}
+
+<h1>Register for BlahBlah</h1>
+<p>Please register to begin sending videos to your friends.</p>
+<form class = "register" method = "POST">
+        <input type="text" class="form_control" placeholder="Enter your e-mail address." name = "emailaddress"><br>
+        <input type="password" class = "form_control" placeholder="Please enter your password." name = "password"><br>
+        <input type="password_confirm" class="form_control" placeholder="Please re-enter your password."><br>
+        <input type="submit" class="btn btn-lg btn-primary btn-block" value="Submit"><br>
+    </form>
+
+{% endblock %}

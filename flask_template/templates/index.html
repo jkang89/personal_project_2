@@ -12,13 +12,21 @@
         Not a user? <a href="{{ url_for("register") }}">Register </a>a new account<br>
         <input type="submit" class="btn btn-lg btn-primary btn-block" value="Submit"><br>
     </form>
-    <video autoplay></video>
-        <script src="/Desktop/project/static/js/webcam.js"></script>
-        <link href="/static/js/webcam.js" rel="webcam">
+    
+    <video autoplay id="video"></video>-->
+    <!--<video id="basic-stream" class="videostream" autoplay=""></video>-->
+
+        <!--<link href="/static/js/webcam.js" rel="webcam">-->
         <button id="startbutton">Take video</button>
         <canvas id="canvas"></canvas>
             <!-- does this also take video or just a picture? and do I need to add javascript to get this to work?-->
             <!-- use this link https://developer.mozilla.org/en-US/docs/WebRTC/Taking_webcam_photos -->
             <!-- figure out canvas -->
+
+{% endblock %}
+
+{% block javascript %} 
+
+<script src="/static/js/webcam.js"></script>
 
 {% endblock %}

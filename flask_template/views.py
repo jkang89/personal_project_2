@@ -30,9 +30,11 @@ def index():
 
 @app.route("/post/<int:id>")
 def view_post(id):
-    post = Post.query.get(id)
-    return render_template("post.html", post=post)
+    pass
+    #post = Post.query.get(id)
+    #return render_template("post.html", post=post)
 
+"""
 @app.route("/post/new")
 @login_required
 def new_post():
@@ -53,6 +55,7 @@ def create_post():
     model.session.refresh(post)
 
     return redirect(url_for("view_post", id=post.id))
+"""
 
 @app.route("/login")
 def login():
