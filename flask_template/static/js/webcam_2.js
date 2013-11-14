@@ -1,10 +1,8 @@
-video = document.getElementById("video")
 
-      navigator.webkitGetUserMedia("video",
+
+video = document.getElementById("video");
+      navigator.webkitGetUserMedia({video:true, audio:true},
           function(stream) {
-            video.src = window.webkitURL.createObjectURL(stream)
-          },
-          function(err) {
-            console.log("Unable to get video stream!")
+            video.src = window.webkitURL.createObjectURL(stream);
           }
-      )
+      );

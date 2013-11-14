@@ -22,11 +22,15 @@
             <!-- does this also take video or just a picture? and do I need to add javascript to get this to work?-->
             <!-- use this link https://developer.mozilla.org/en-US/docs/WebRTC/Taking_webcam_photos -->
             <!-- figure out canvas -->
+    <canvas id="a" width="300" height="300"
+            style="border:1px solid #000000;"></canvas>
+        <button id="startcanvas">Start Canvas</button>
 
 {% endblock %}
 
 {% block javascript %} 
 
 <script src="/static/js/webcam.js"></script>
+<script src="/static/js/canvas.js"></script>
 
 {% endblock %}
