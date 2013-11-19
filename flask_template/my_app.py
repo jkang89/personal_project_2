@@ -9,6 +9,18 @@ app.secret_key = "shhhthisisasecret"
 def index():
     return render_template("index.html")
 
+@app.route("/profile")
+def profile():
+    return render_template("profile.html")
+
+@app.route("/camera")
+def camera():
+    return render_template("camera.html")
+
+@app.route("/customize")
+def customize():
+    pass
+
 @app.route("/register")
 def register():
     return render_template("register.html")

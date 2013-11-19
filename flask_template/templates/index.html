@@ -1,36 +1,25 @@
 {% extends 'master.html' %}
 {% block body %}
 
-    <div>
-        <h1>Welcome to Silly with Friends!</h1>
-        <p>Please log in so that we can begin recording fun videos.</p>
+    <div class="nav">Menu: <a href="/profile">Profile</a> | 
+        <a href="/camera">Camera</a> | 
+        <a href="/customize">Customize</a>
     </div>
-    <form class = "signin" method = "POST">
-        <h3 class = "signin_heading">Please sign in to your account.</h3><br>
-        <input type="text" class="form_control" placeholder="Enter your e-mail address." name = "emailaddress"><br>
-        <input type="password" class = "form_control" placeholder="Please enter your password." name = "password"><br>
-        Not a user? <a href="{{ url_for("register") }}">Register </a>a new account<br>
-        <input type="submit" class="btn btn-lg btn-primary btn-block" value="Submit"><br>
-    </form>
-    
-    <video autoplay id="video"></video>-->
-    <!--<video id="basic-stream" class="videostream" autoplay=""></video>-->
 
-        <!--<link href="/static/js/webcam.js" rel="webcam">-->
-        <button id="startbutton">Take video</button>
-        <canvas id="canvas"></canvas>
-            <!-- does this also take video or just a picture? and do I need to add javascript to get this to work?-->
-            <!-- use this link https://developer.mozilla.org/en-US/docs/WebRTC/Taking_webcam_photos -->
-            <!-- figure out canvas -->
-    <canvas id="a" width="300" height="300"
-            style="border:1px solid #000000;"></canvas>
-        <button id="startcanvas">Start Canvas</button>
+    <div class = "intro" id = "title">
+        <h1>PuriSticka Friends</h1>
+        <p>Please log in or create an account so that we can begin recording fun videos.</p>
+    </div>
+    <div class = "form" id = "signinform">    
+        <form class = "signin" method = "POST">
+            <!--<h3 class = "signin_heading">Please sign in to your account.</h3><br>-->
+            <input type="text" class="form_control" placeholder="Enter your e-mail address." name = "emailaddress"><br>
+            <input type="password" class = "form_control" placeholder="Please enter your password." name = "password"><br>
+            Not a user? <a href="{{ url_for("register") }}">Register </a>a new account<br>
+            <input type="submit" class="btn btn-lg btn-primary btn-block" value="Submit"><br>
+        </form>
+    </div>
+
 
 {% endblock %}
 
-{% block javascript %} 
-
-<script src="/static/js/webcam.js"></script>
-<script src="/static/js/canvas.js"></script>
-
-{% endblock %}

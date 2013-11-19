@@ -1,0 +1,29 @@
+{% extends 'master.html' %}
+{% block body %}
+<style>
+video {
+    display: None;
+}
+</style>
+    <!--<button id="startbutton">Take video</button>-->
+
+<!--<canvas id="a" width="300" height="300"
+        style="border:1px solid #000000;"></canvas>
+    <button id="startcanvas">Start Canvas</button>-->
+<canvas id="mycanvas" width="640" height="480"
+        style="border:1px solid #000000;"></canvas>
+<video autoplay id="video" width = "640" height = "480"></video>
+<button id="startcanvas2">Start Canvas Video</button>
+<a href="" id="copy-to-canvas">Copy</a>
+<div id = "customize">
+    <p>Ready?  Let's <a href = "/customize">customize</a> our pictures.</p>
+</div>
+
+{% endblock %}
+
+{% block javascript %} 
+
+<script src="/static/js/webcam3.js"></script>
+<script src="/static/js/canvas.js"></script>
+
+{% endblock %}

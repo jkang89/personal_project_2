@@ -1,31 +1,44 @@
-var camera = (function(){
+function camera(){
     var video, canvas, context, videoPause, overlayContext;
+    var renderTimer;
 
-    function initVideoStream(){
-        console.log("In init video stream");
+    function initVideoStream() {
         video = document.getElementById("video");
-        video.setAttribute('width', 320);
-        video.setAttribute('height', 240);
-        var cameraExists = false;
+        video.setAttribute('width', options.width);
+        video.setAttribute('height', options.height);
 
-        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+        navigator.getUserMedia = navigator.getUserMedia         ||
+                                 navigator.webkitGetUserMedia   ||
+                                 navigator.mozGetUserMedia      ||
+                                 navigator.msGetUserMedia;
 
-        window.URL = window.URL || window.webkitURL || window.mozURL || window.msURL;
+        window.URL = window.URL     || window.webkitURL ||
+                     window.mozURL  || window.msURL;
 
-        if (navigator.getUserMedia){
-            navigator.webkitGetUserMedia({video:true, audio:true},
-                  function(stream) {
-                    video.src = window.webkitURL.createObjectURL(stream);
-                    //initCanvas();
-                  }
-              );
+        if(navigator.getUserMedia) {
+            navigator.getUserMedia ({
+                video: true,
+                audio: false
+            }, function(stream) {
+                options.onSuccess();
+
+                if (window.navigator.mozGetUserMedia) {
+                    video.mozGetUserMedia = stream;
+                } else {
+                    video.src = window.URL.createObjectURL(stream);
+                };
+
+                initCanvas();
+            });
+        } else {
+            options.onNotSupported();
         };
     };
 
-    function initCanvas(){
+    function initCanvas() {
         canvas = document.getElementById("canvas");
-        canvas.setAttribute('width', 320);
-        canvas.setAttribute('height', 240);
+        canvas.setAttribute('width', options.width);
+        canvas.setAttribute('height', options.height);
         context = canvas.getContext("2d");
 
         //canvasOverlay = document.createElement("canvas");
@@ -40,10 +53,15 @@ var camera = (function(){
         //overlayContext.clearRect(0,0,320,240);
         //console.log(overlayContext)
 
-        video.appendChild(canvas);
-        video.appendChild(canvasOverlay)
+        vid.appendChild(canvas);
+        //vid.appendChild(canvasOverlay)
 
-        starCapture();
+        if (options.mirror) {
+            context.translate(canvas.width, 0);
+            context.scale(-1, 1);
+        };
+
+        startCapture();
     };
     //for facetracking
     //function headtrack(){
@@ -74,32 +92,69 @@ var camera = (function(){
         //}
     //};
 
-    function startCapture(){
+    function startCapture() {
         cameraExists = true;
         video.play();
+        renderTimer = setInterval(function() {
+            context.drawImage(video, 0, 0, video.width, video.height);
+        }, Math.round(1000/options.fps));
         //headtrack();
     };
 
     function pauseCapture(){
+        if (renderTimer) clearInterval(renderTimer);
         video.pause();
         //removes the even listener, but doesn't stop facetracking
         //document.removeEventListener("facetrackingEvent", greenRect);
     };
 
-    var errorCallback = function(error){
-        console.log('Error', error);
+    function stopCapture() {
+        pauseCapture();
+
+        //WHAT DOES THIS CODE DO??? *table flip* *bang head against computer keyboard* T.T
+        if (video.mozSrcObject !== undefined) {
+            video.mozSrcObject = null;
+        } else {
+            video.src = "";
+        };
     };
+
+    function getVideoInfo() {
+        var v = document.getElementById("livevideo");
+        //figure out where Kara has "livevideo" in her code
+        var ctx = v.getContext("2d");
+        return ctx.getImageData(0,0,canvas.width, canvas.height);
+    };
+
+    // var errorCallback = function(error){
+    //     console.log('Error', error);
+    // };
 
     return {
-        init: function() {
-            initVideoStream();
-        },
-        start: startCapture,
-        pause: pauseCapture
+    //     init: function() {
+    //         initVideoStream();
+    //     },
+    //     start: startCapture,
+    //     pause: pauseCapture
+    // };
+
+        init: function(captureOptions) {
+            var doNothing = function(){};
+
+            options = captureOptions || {};
+            options.fps = options.fps || 30;
+            options.width = options.width || 600;
+            options.height = options.height || 400;
+            options.mirror = options.mirror || false;
+            options.targetCanvas = options.targetCanvas || null;
+
+        }
+    // need to figure out what this part of the code does before trying it
     };
 
-})();
+} //();
+//the (); at the end calls the camera function --> needs to call itself
 
 $("#startbutton").click(function() {
-    camera.init();
+    camera();
 });

@@ -1,3 +1,4 @@
+//drawing image on canvas and writing text on picture
 function drawOnPicture() {
     var a_canvas = document.getElementById("a");
     var aCon = a_canvas.getContext("2d");
@@ -23,6 +24,24 @@ function drawOnPicture() {
 
 };
 
+//call image from video
+function getVideo() {
+    var camera = document
+    var canvas = document.getElementById("mycanvas");
+    if (canvas.getContext);
+        var context = canvas.getContext("2d");
+
+        return document.getElementById("video");
+
+    function drawOnVideo() {
+
+    }
+};
+
 $("#startcanvas").click(function() {
     drawOnPicture();
+});
+
+$("#startcanvas2").click(function() {
+    getVideo();
 });
