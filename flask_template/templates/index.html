@@ -1,24 +1,11 @@
 {% extends 'master.html' %}
 {% block body %}
 
-    <div class="nav">Menu: <a href="/profile">Profile</a> | 
-        <a href="/camera">Camera</a> | 
-        <a href="/customize">Customize</a>
-    </div>
-
     <div class = "intro" id = "title">
         <h1>PuriSticka Friends</h1>
-        <p>Please log in or create an account so that we can begin recording fun videos.</p>
+        <p>Please <a href="/login">log in</a> or <a href="/register">create</a> an account so that we can begin recording fun videos.</p>
     </div>
-    <div class = "form" id = "signinform">    
-        <form class = "signin" method = "POST">
-            <!--<h3 class = "signin_heading">Please sign in to your account.</h3><br>-->
-            <input type="text" class="form_control" placeholder="Enter your e-mail address." name = "emailaddress"><br>
-            <input type="password" class = "form_control" placeholder="Please enter your password." name = "password"><br>
-            Not a user? <a href="{{ url_for("register") }}">Register </a>a new account<br>
-            <input type="submit" class="btn btn-lg btn-primary btn-block" value="Submit"><br>
-        </form>
-    </div>
+
 
 
 {% endblock %}

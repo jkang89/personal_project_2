@@ -4,6 +4,11 @@
 video {
     display: None;
 }
+
+#bgcanvas {
+    display: None;
+}
+
 </style>
     <!--<button id="startbutton">Take video</button>-->
 
@@ -12,12 +17,19 @@ video {
     <button id="startcanvas">Start Canvas</button>-->
 <canvas id="mycanvas" width="640" height="480"
         style="border:1px solid #000000;"></canvas>
+<canvas id="bgcanvas" width="640" height="480"
+        style="border:1px solid #000000;"></canvas>
 <video autoplay id="video" width = "640" height = "480"></video>
 <button id="startcanvas2">Start Canvas Video</button>
 <button id="grayscale">Grayscale</button>
 <button id="sepia">Sepia</button>
 <button id="blackwhite">Black and White</button>
 <button id="brighten">Flawless</button>
+<button id="red">Red</button>
+<button id="blue">Blue</button>
+<button id="green">Green</button>
+<button id="threshold">Threshold</button>
+<button id="normal">Normal</button>
 <a href="" id="copy-to-canvas">Copy</a>
 <div id = "customize">
     <p>Ready?  Let's <a href = "/customize">customize</a> our pictures.</p>

@@ -1,15 +1,70 @@
 <html>
     <head>
         <style>
-            .nav {
+
+            {% block style %} {% endblock %}
+            
+            .navbar {
                 background-color: rgba(200,200, 200, 0.5);
                 margin: 1em;
 
             }
 
+            ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 10;
+            }
+
+            li {
+                display: inline;
+            }
+
+            body {
+                background-image: url("/static/img/anime_bg.jpg");
+                background-size: 100%;
+                background-repeat: no-repeat;
+            }
+
+            .form label {
+                float: left;
+                text-align: left;
+                margin-right: 15px;
+                width: 100px;
+                color: #000000;
+            }
+
+            .regform label {
+                float: left;
+                text-align: left;
+                margin-right: 15px;
+                width: 250px;
+                color: #000000;
+            }
+
+            .submit input {
+                width: auto;
+                padding: 9px 15px;
+                background: #3B5998;
+                border: 0;
+                font-size: 14px;
+                color: #FFFFFF;
+                -moz-border-radius: 5px;
+                -webkit-border-radius: 5px;
+            }
+
         </style>
     </head>
     <body>
+        <div class="navbar" id="nav">
+            <ul id="nav">
+                <li><a href="/">Home</a></li> |
+                <li><a href="/profile">Profile</a></li> |
+                <li><a href="/camera">Camera</a></li> |
+                <li><a href="/customize">Customize</a></li>
+            </ul>
+        </div>
+
         <div class = "container">
             {% block body %} {% endblock %}
             <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.js"></script>
