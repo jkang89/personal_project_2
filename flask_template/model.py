@@ -42,12 +42,12 @@ class Pictures(Base):
     
     id = Column(Integer, primary_key=True)
     picture_name = Column(String(64), nullable=False)
-    picture_data = Column(Text, nullable=False)
-    taken_date = Column(DateTime, nullable=False, default=datetime.now)
+    file_path = Column(String(256), nullable=False)
     user_id = Column(Integer, ForeignKey("users.id"))
 
     user = relationship("User")
 
+#backref to have relationship from both sides
 
 def create_tables():
     Base.metadata.create_all(engine)

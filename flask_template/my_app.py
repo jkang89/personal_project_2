@@ -15,6 +15,18 @@ def login():
 
 @app.route("/profile")
 def profile():
+    username = session.get('username')
+    if username:
+        user_id = model_session.query(model.User).filter_by(username=username).first().user_id
+    else:
+        user_id = 0
+
+    user_path = 'static/pictures/%d' % user_id
+    if not os.path.exists(user_path):
+        os.mkdir(user_path)
+
+    model_session.commit()
+
     return render_template("profile.html")
 
 @app.route("/camera")

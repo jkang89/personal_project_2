@@ -30,18 +30,6 @@ var camera = (function(){
         canvas.setAttribute('height', 480);
         context = canvas.getContext("2d");
 
-
-        //canvas.appendChild(video)
-        //video.appendChild(canvas);
-        //video.appendChild(canvasOverlay)
-
-        // function snapshot() {
-        //     if (localMediaStream) {
-        //         context.drawImage(video, 0, 0);
-        //     }
-
-        // };
-
         startCapture();
     };
 
@@ -49,17 +37,13 @@ var camera = (function(){
         var fps = 15;
         render_timer = setInterval(copy_frame, 1000/fps);
 
-        // cameraExists = true;
-        // video.play();
-        //headtrack();
     };
 
     function pauseCapture(){
         clearInterval(render_timer);
         render_timer = null;
-        // video.pause();
-        //removes the even listener, but doesn't stop facetracking
-        //document.removeEventListener("facetrackingEvent", greenRect);
+
+        saveCanvas();
     };
 
     function toggleCapture() {
@@ -84,9 +68,23 @@ var camera = (function(){
 
         filterCanvas(pixels);
         my_ctx.putImageData(pixels, 0, 0);
-        //my_ctx.drawImage(pixels, 0, 0);
-
     };
+
+    function saveCanvas() {
+        var canvas = $("#mycanvas")[0];
+        var dataURL = canvas.toDataURL();
+        document.getElementById('canvasImg').src = dataURL;
+    };
+
+    // function saveCanvas(canvas, destFile) {
+    //     var video = $("#video")[0];
+    //     var mycanvas = $("#mycanvas")[0];
+    //     my_ctx = mycanvas.getContext('2d');
+
+    //     var dataURL = mycanvas.toDataURL();
+    //     document.getElementById('canvasimg').src = dataURL;
+    // put in an if statement, if button is clicked, then draw image on canvas and save
+    // }
 
     return {
         init: function() {
@@ -121,9 +119,9 @@ grayscale = function(pixels, args) {
 brightness = function(pixels, args) {
     var d = pixels.data;
     for (var i=0; i<d.length; i+=4) {
-        d[i] += 1;
-        d[i+1] += 1;
-        d[i+2] += 1;
+        d[i] += 125;
+        d[i+1] += 125;
+        d[i+2] += 125;
     }
     return pixels;
 };
@@ -187,8 +185,8 @@ threshold = function(pixels, args) {
         var r = d[i];
         var g = d[i+1];
         var b = d[i+2];
-        var v = (0.2126*r + 0.7152*g + 0.0722*b >= threshold) ? 255 : 0;
-        d[i] = d[i+1] = d[i+2] = v
+        var v = (0.2126 * r + 0.7152 * g + 0.0722 * b >= 50) ? 255 : 0;
+        d[i] = d[i+1] = d[i+2] = v;
     }
     return pixels
 };
@@ -240,4 +238,9 @@ $("#normal").click(function() {
 
 $("#threshold").click(function() {
     current_filter = threshold;
+});
+
+//doesn't work, takes it to a different location
+$("#saveImage").click(function() {
+    window.location.assign('/static/img/')
 });
