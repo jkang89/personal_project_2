@@ -33,10 +33,6 @@ def profile():
 def camera():
     return render_template("camera.html")
 
-@app.route("/customize")
-def customize():
-    pass
-
 @app.route("/register")
 def register():
     return render_template("register.html")

@@ -1,12 +1,21 @@
 {% extends 'master.html' %}
 {% block body %}
 
-    <div class = "intro" id = "title">
-        <h1>PuriSticka Friends</h1>
-        <p>Please <a href="/login">log in</a> or <a href="/register">create</a> an account so that we can begin recording fun videos.</p>
-    </div>
+  <div>
+    <h1>PuriSticka Friends</h1>
+    <p>Please <a href="/login">log in</a> or <a href="/register">create</a> an account so that we can begin taking photos.</p>
+  </div>
 
-
+  <button id="tocamera" class="btn btn-success btn-lg">Ready? Say Cheese!</button>
 
 {% endblock %}
 
+{% block javascript %}
+<script>
+  $(function() {
+    $('#tocamera').click(function() {
+      window.location.href = '/camera';
+    });
+  });
+</script>
+{% endblock %}

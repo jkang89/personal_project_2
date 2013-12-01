@@ -240,6 +240,10 @@ $("#threshold").click(function() {
     current_filter = threshold;
 });
 
+$("#tocamera").click(function() {
+    window.location.href = '/camera';
+})
+
 //doesn't work, takes it to a different location
 $("#saveImage").click(function() {
     window.location.assign('/static/img/')
