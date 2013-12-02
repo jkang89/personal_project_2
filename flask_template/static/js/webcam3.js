@@ -13,16 +13,16 @@ var camera = (function(){
         var cameraExists = false;
 
         navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
-        window.URL = window.URL || window.webkitURL || window.mozURL || window.msURL;
+        vendorURL = window.URL || window.webkitURL || window.mozURL || window.msURL;
 
-        navigator.getUserMedia( {video:true, audio:false}, 
-            function(stream) {
-                video.src = window.URL.createObjectURL(stream);
-                console.log("Got the stream");
+        navigator.getUserMedia( {video: true, audio: false}, 
+            function (stream) {
+                video.src = vendorURL.createObjectURL(stream);
+                console.log("Got the stream.");
 
                 startCapture();
-              }
-          );
+            }
+        );
     };
     function initCanvas() {
         canvas = document.getElementById("canvas");
@@ -74,17 +74,9 @@ var camera = (function(){
         var canvas = $("#mycanvas")[0];
         var dataURL = canvas.toDataURL();
         document.getElementById('canvasImg').src = dataURL;
+        window.alert("Right click to save your picture!");
+
     };
-
-    // function saveCanvas(canvas, destFile) {
-    //     var video = $("#video")[0];
-    //     var mycanvas = $("#mycanvas")[0];
-    //     my_ctx = mycanvas.getContext('2d');
-
-    //     var dataURL = mycanvas.toDataURL();
-    //     document.getElementById('canvasimg').src = dataURL;
-    // put in an if statement, if button is clicked, then draw image on canvas and save
-    // }
 
     return {
         init: function() {
@@ -197,11 +189,6 @@ function startup_stuff() {
 
 $(startup_stuff);
 
-// $("#startcanvas2").click(function() {
-    // camera.init();
-// });
-
-
 $("#copy-to-canvas").click(function() {
     // copy_frame();
     camera.toggle();
@@ -240,11 +227,6 @@ $("#threshold").click(function() {
     current_filter = threshold;
 });
 
-$("#tocamera").click(function() {
-    window.location.href = '/camera';
-})
-
-//doesn't work, takes it to a different location
 $("#saveImage").click(function() {
-    window.location.assign('/static/img/')
+    $("#canvasImg")[0].document.execCommand('SaveAs', false, 'image.png');
 });

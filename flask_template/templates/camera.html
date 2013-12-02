@@ -10,17 +10,16 @@ video {
 }
 
 </style>
-    <!--<button id="startbutton">Take video</button>-->
 
-<!--<canvas id="a" width="300" height="300"
-        style="border:1px solid #000000;"></canvas>
-    <button id="startcanvas">Start Canvas</button>-->
 <canvas id="mycanvas" width="640" height="480"
         style="border:1px solid #000000;"></canvas>
 <canvas id="bgcanvas" width="640" height="480"
         style="border:1px solid #000000;"></canvas>
 <video autoplay id="video" width = "640" height = "480"></video>
-<img id="canvasImg" alt="Right click to save your picture!">
+<div>
+    <img id="canvasImg">
+</div>
+<button id="normal">Normal</button>
 <button id="grayscale">Black and White</button>
 <button id="sepia">Sepia</button>
 <button id="brighten">Flawless</button>
@@ -28,18 +27,14 @@ video {
 <button id="blue">Blue</button>
 <button id="green">Green</button>
 <button id="threshold">Threshold</button>
-<button id="normal">Normal</button>
 <button id="copy-to-canvas">Take a snapshot!</button>
-<input id="saveImage" type="button" value="save image"></input>
-<div id = "customize">
-    <p>Ready?  Let's <a href = "/customize">customize</a> our pictures.</p>
-</div>
+<button id="saveImage">Save Image</button>
+
 
 {% endblock %}
 
 {% block javascript %} 
 
 <script src="/static/js/webcam3.js"></script>
-<script src="/static/js/canvas.js"></script>
 
 {% endblock %}
