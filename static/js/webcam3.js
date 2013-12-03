@@ -1,4 +1,3 @@
-//todo: use one quotation
 var current_filter = null;
 
 var camera = (function(){
@@ -6,8 +5,8 @@ var camera = (function(){
     var render_timer = null;
 
     function initVideoStream(){
-        console.log("In init video stream");
-        video = document.getElementById("video");
+        console.log('In init video stream');
+        video = document.getElementById('video');
         video.setAttribute('width', 640);
         video.setAttribute('height', 480);
 
@@ -19,17 +18,17 @@ var camera = (function(){
         navigator.getUserMedia( {video: true, audio: false}, 
             function (stream) {
                 video.src = vendorURL.createObjectURL(stream);
-                console.log("Got the stream.");
+                console.log('Got the stream.');
 
                 startCapture();
             }
         );
     };
     function initCanvas() {
-        canvas = document.getElementById("canvas");
+        canvas = document.getElementById('canvas');
         canvas.setAttribute('width', 640);
         canvas.setAttribute('height', 480);
-        context = canvas.getContext("2d");
+        context = canvas.getContext('2d');
 
         startCapture();
     };
@@ -51,21 +50,21 @@ var camera = (function(){
         console.log(render_timer);
         if (render_timer != null) {
             pauseCapture();
-            $("#canvasImg")[0].style.display = "block"
+            $('#canvasImg')[0].style.display = 'block'
             //show capture
         } else {
             startCapture();
             //hide capture
-            $("#canvasImg")[0].style.display = "none"
+            $('#canvasImg')[0].style.display = 'none'
         }
     };
 
     function copy_frame() {
-        var video = $("#video")[0];
-        var mycanvas = $("#mycanvas")[0];
-        var bgcanvas = $("#bgcanvas")[0];
-        var my_ctx = mycanvas.getContext("2d");
-        var bg_ctx = bgcanvas.getContext("2d");
+        var video = $('#video')[0];
+        var mycanvas = $('#mycanvas')[0];
+        var bgcanvas = $('#bgcanvas')[0];
+        var my_ctx = mycanvas.getContext('2d');
+        var bg_ctx = bgcanvas.getContext('2d');
 
         bg_ctx.drawImage(video, 0, 0);
 
@@ -76,7 +75,7 @@ var camera = (function(){
     };
 
     function saveCanvas() {
-        var canvas = $("#mycanvas")[0];
+        var canvas = $('#mycanvas')[0];
         var dataURL = canvas.toDataURL();
         document.getElementById('canvasImg').src = dataURL;
     };
@@ -177,7 +176,7 @@ $(function() {
     camera.init();
 });
 
-$("#copy-to-canvas").click(function() {
+$('#copy-to-canvas').click(function() {
     camera.toggle();
     return false;    
 });
@@ -188,6 +187,6 @@ $('.btn-add-filter').click(function(e) {
 });
 
 
-$("#saveImage").click(function() {
-    window.location.href = $("#canvasImg")[0].src.replace('image/png', 'image/octet-stream');
+$('#saveImage').click(function() {
+    window.location.href = $('#canvasImg')[0].src.replace('image/png', 'image/octet-stream');
 });
