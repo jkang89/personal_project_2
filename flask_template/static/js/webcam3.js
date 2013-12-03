@@ -50,8 +50,12 @@ var camera = (function(){
         console.log(render_timer);
         if (render_timer != null) {
             pauseCapture();
+            $("#canvasImg")[0].style.display = "block"
+            //show capture
         } else {
             startCapture();
+            //hide capture
+            $("#canvasImg")[0].style.display = "none"
         }
     };
 
@@ -74,8 +78,6 @@ var camera = (function(){
         var canvas = $("#mycanvas")[0];
         var dataURL = canvas.toDataURL();
         document.getElementById('canvasImg').src = dataURL;
-        window.alert("Right click to save your picture!");
-
     };
 
     return {
@@ -190,7 +192,6 @@ function startup_stuff() {
 $(startup_stuff);
 
 $("#copy-to-canvas").click(function() {
-    // copy_frame();
     camera.toggle();
     return false;    
 });
@@ -228,5 +229,5 @@ $("#threshold").click(function() {
 });
 
 $("#saveImage").click(function() {
-    $("#canvasImg")[0].document.execCommand('SaveAs', false, 'image.png');
+    window.location.href = $("#canvasImg")[0].src.replace('image/png', 'image/octet-stream');
 });
