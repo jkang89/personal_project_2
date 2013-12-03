@@ -1,11 +1,6 @@
 <html>
     <head>
         <style>
-            .navbar {
-                margin: 1em;
-
-            }
-
             ul {
                 list-style-type: none;
                 margin: 0;
@@ -50,7 +45,7 @@
             }
 
             .container {
-                background-color:rgba(255,255,255,0.3);
+                background-color:rgba(255,255,255,0.7);
                 padding: 1em;
                 border-radius: 25px;
                 font-family: arial;
@@ -62,7 +57,18 @@
         <link rel="stylesheet" href="/static/css/bootstrap.css">
     </head>
     <body>
-        <img id="canvasimg" alt="Right click to save me!">
+        <nav class="navbar navbar-default" role="navigation" style="font:arial; color: #F08080;">
+            <!--change font color-->
+
+            <div class="navbar-header">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">Home &nbsp;&nbsp;&nbsp;| </a></li>
+                    <li><a href="/camera">Camera &nbsp;&nbsp;&nbsp;| </a></li>
+                    <li><a href="/about">About</a></li>
+                </ul>
+            </div>
+        </nav>
+        <img id="canvasimg">
 
         <div class = "container">
             {% block body %} {% endblock %}
