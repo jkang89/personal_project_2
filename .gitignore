@@ -1,4 +1,10 @@
+.DS_Store
 *.pyc
+*.pyo
 env
-.*.swp
-*.db
+env*
+dist
+*.egg
+*.egg-info
+_mailinglist
+.tox

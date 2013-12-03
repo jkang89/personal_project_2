@@ -21,11 +21,12 @@ Base.query = session.query_property()
 class User(Base, UserMixin):
     __tablename__ = "users" 
     id = Column(Integer, primary_key=True)
+    username = Column(String(64), nullable=False)
     email = Column(String(64), nullable=False)
     password = Column(String(64), nullable=False)
     salt = Column(String(64), nullable=False)
 
-    posts = relationship("Post", uselist=True)
+    pictures = relationship("Pictures", uselist=True)
 
     def set_password(self, password):
         self.salt = bcrypt.gensalt()
@@ -36,18 +37,17 @@ class User(Base, UserMixin):
         password = password.encode("utf-8")
         return bcrypt.hashpw(password, self.salt.encode("utf-8")) == self.password
 
-class Post(Base):
-    __tablename__ = "posts"
+class Pictures(Base):
+    __tablename__ = "pictures"
     
     id = Column(Integer, primary_key=True)
-    title = Column(String(64), nullable=False)
-    body = Column(Text, nullable=False)
-    created_at = Column(DateTime, nullable=False, default=datetime.now)
-    posted_at = Column(DateTime, nullable=True, default=None)
+    picture_name = Column(String(64), nullable=False)
+    file_path = Column(String(256), nullable=False)
     user_id = Column(Integer, ForeignKey("users.id"))
 
     user = relationship("User")
 
+#backref to have relationship from both sides
 
 def create_tables():
     Base.metadata.create_all(engine)
