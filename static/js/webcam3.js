@@ -1,3 +1,4 @@
+//todo: use one quotation
 var current_filter = null;
 
 var camera = (function(){
@@ -98,135 +99,94 @@ filterCanvas = function(pixels) {
     }
 };
 
-grayscale = function(pixels, args) {
-    //pixels is not defined
-    var d = pixels.data;
-    for (var i = 0; i<d.length; i += 4) {
-        var r = d[i];
-        var g = d[i+1];
-        var b = d[i+2];
-        d[i] = d[i+1] = d[i+2] = (r+g+b)/3;
+var filterFunctions = {
+    grayscale: function(pixels, args) {
+        var d = pixels.data;
+
+        for (var i = 0; i<d.length; i += 4) {
+            var r = d[i],
+                g = d[i+1],
+                b = d[i+2];
+            d[i] = d[i+1] = d[i+2] = (r+g+b)/3;
+        }
+        return pixels;
+    },
+    brightness: function(pixels, args) {
+        var d = pixels.data;
+        for (var i=0; i<d.length; i+=4) {
+            d[i] += 125;
+            d[i+1] += 125;
+            d[i+2] += 125;
+        }
+        return pixels;
+    },
+    sepia: function(pixels, args) {
+        var d = pixels.data;
+
+        for (var i = 0; i < d.length; i += 4) {
+            var r = d[i],
+                g = d[i+1],
+                b = d[i+2];
+            d[i] = (r*0.393) + (g*0.769) + (b*0.189);
+            d[i+1] = (r*0.349) + (g*0.686) + (b*0.186);
+            d[i+2] = (r*0.272) + (g*0.534) + (b*0.131);
+        }
+        return pixels;
+    },
+    red: function(pixels, args) {
+        var d = pixels.data;
+        for (var i = 0; i < d.length; i += 4) {
+            d[i] = Math.min(255, d[i] * 2);
+            d[i+1] = d[i+1]/2;
+            d[i+2] = d[i+2]/2;
+        }
+        return pixels;
+    },
+    blue: function(pixels, args) {
+        var d = pixels.data;
+        for (var i = 0; i < d.length; i += 4) {
+            d[i] = d[i]/2;
+            d[i+1] = d[i+1]/2;
+            d[i+2] = Math.min(255, d[i+2] * 2);
+        }
+        return pixels;
+    },
+    green: function(pixels, args) {
+        var d = pixels.data;
+        for (var i = 0; i < d.length; i += 4) {
+            d[i] = d[i]/2;
+            d[i+1] = Math.min(255, d[i+1] * 2);
+            d[i+2] = d[i+2]/2;
+        }
+        return pixels;
+    },
+    threshold: function(pixels, args) {
+        var d = pixels.data;
+        for (var i = 0; i < d.length; i += 4) {
+            var r = d[i];
+            var g = d[i+1];
+            var b = d[i+2];
+            var v = (0.2126 * r + 0.7152 * g + 0.0722 * b >= 50) ? 255 : 0;
+            d[i] = d[i+1] = d[i+2] = v;
+        }
+        return pixels;
     }
-    return pixels;
 };
 
-brightness = function(pixels, args) {
-    var d = pixels.data;
-    for (var i=0; i<d.length; i+=4) {
-        d[i] += 125;
-        d[i+1] += 125;
-        d[i+2] += 125;
-    }
-    return pixels;
-};
-
-sepia = function(pixels, args) {
-    var d = pixels.data;
-    for (var i = 0; i < d.length; i += 4) {
-        var r = d[i];
-        var g = d[i+1];
-        var b = d[i + 2];
-        d[i] = (r*0.393) + (g*0.769) + (b*0.189);
-        d[i+1] = (r*0.349) + (g*0.686) + (b*0.186);
-        d[i+2] = (r*0.272) + (g*0.534) + (b*0.131);
-    }
-    return pixels;
-};
-
-red = function(pixels, args) {
-    var d = pixels.data;
-    for (var i = 0; i < d.length; i += 4) {
-        var r = d[i];
-        var g = d[i+1];
-        var b = d[i+2];
-        d[i] = Math.min(255, d[i] * 2);
-        d[i+1] = d[i+1]/2;
-        d[i+2] = d[i+2]/2;
-    }
-    return pixels;
-};
-
-blue = function(pixels, args) {
-    var d = pixels.data;
-    for (var i = 0; i < d.length; i += 4) {
-        var r = d[i];
-        var g = d[i+1];
-        var b = d[i+2];
-        d[i] = d[i]/2;
-        d[i+1] = d[i+1]/2;
-        d[i+2] = Math.min(255, d[i+2] * 2)
-    }
-    return pixels
-};
-
-green = function(pixels, args) {
-    var d = pixels.data;
-    for (var i = 0; i < d.length; i += 4) {
-        var r = d[i];
-        var g = d[i+1];
-        var b = d[i+2];
-        d[i] = d[i]/2;
-        d[i+1] = Math.min(255, d[i+1] * 2);
-        d[i+2] = d[i+2]/2;
-    }
-    return pixels
-};
-
-threshold = function(pixels, args) {
-    //doesn't work
-    var d = pixels.data;
-    for (var i = 0; i < d.length; i += 4) {
-        var r = d[i];
-        var g = d[i+1];
-        var b = d[i+2];
-        var v = (0.2126 * r + 0.7152 * g + 0.0722 * b >= 50) ? 255 : 0;
-        d[i] = d[i+1] = d[i+2] = v;
-    }
-    return pixels
-};
-
-function startup_stuff() {
+$(function() {
     camera.init();
-}
-
-$(startup_stuff);
+});
 
 $("#copy-to-canvas").click(function() {
     camera.toggle();
     return false;    
 });
 
-$("#grayscale").click(function() {
-    current_filter = grayscale;
+
+$('.btn-add-filter').click(function(e) {
+    current_filter = filterFunctions[$(e.target).data('filter')];
 });
 
-$("#brighten").click(function() {
-    current_filter = brightness;
-});
-
-$("#sepia").click(function() {
-    current_filter = sepia;
-});
-
-$("#red").click(function() {
-    current_filter = red;
-});
-
-$("#blue").click(function() {
-    current_filter = blue;
-});
-
-$("#green").click(function() {
-    current_filter = green;
-});
-
-$("#normal").click(function() {
-    current_filter = null;
-});
-
-$("#threshold").click(function() {
-    current_filter = threshold;
-});
 
 $("#saveImage").click(function() {
     window.location.href = $("#canvasImg")[0].src.replace('image/png', 'image/octet-stream');
