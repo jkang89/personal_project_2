@@ -1,0 +1,30 @@
+{% extends 'master.html' %}
+{% block body %}
+
+<h1>Register for KonoKawaii</h1>
+<p>Please register to begin taking and sending snapshots to your friends.</p>
+
+<div class = "regform" id = "registerform">
+    <form class = "register">
+        <p class = "username">
+            <input type = "text" name = "username" id = "username"/>
+            <label for = "username">Please Choose a Username</label>
+        </p>
+
+        <p class = "email">
+            <input type = "text" name = "email" id = "email"/>
+            <label for = "email">Enter Your E-mail Address</label>
+        </p>
+
+        <p class = "password">
+            <input type = "text" name = "password" id = "password"/>
+            <label for = "password">Enter a Password For Your Account</label>
+        </p>
+
+        <p class = "submit">
+            <input type = "submit" value = "Submit"/>
+        </p>
+    </form>
+</div>
+
+{% endblock %}

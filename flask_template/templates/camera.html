@@ -1,0 +1,46 @@
+{% extends 'master.html' %}
+{% block body %}
+<style>
+video {
+    display: None;
+}
+
+#bgcanvas {
+    display: None;
+}
+
+</style>
+
+<div style="float: left; padding: 10pt;">
+    <canvas id="mycanvas" width="640" height="480"
+            style="border:1px solid #000000;"></canvas>
+    <canvas id="bgcanvas" width="640" height="480"
+            style="border:1px solid #000000;"></canvas>
+    <video autoplay id="video" width = "640" height = "480"></video>
+</div>
+
+<div>
+    <img id="canvasImg" style="float: left; padding: 10pt; position: absolute; top: 10pt; left: 10pt; border: 2px solid black; display:none;">
+</div>
+
+<div class="text-right">
+    <button id="normal" class="btn btn-default" style="width:150px">Normal</button><br><br>
+    <button id="grayscale" class="btn btn-default" style="width:150px">Black and White</button><br><br>
+    <button id="sepia" class="btn btn-default" style="width:150px">Sepia</button><br><br>
+    <button id="brighten" class="btn btn-default" style="width:150px">Flawless</button><br><br>
+    <button id="red" class="btn btn-default" style="width:150px">Red</button><br><br>
+    <button id="blue" class="btn btn-default" style="width:150px">Blue</button><br><br>
+    <button id="green" class="btn btn-default" style="width:150px">Green</button><br><br>
+    <button id="threshold" class="btn btn-default" style="width:150px">Threshold</button><br><br><br>
+    <button id="copy-to-canvas" class="btn btn-primary" style="width:150px">Start/Pause Video</button>
+    <button id="saveImage" class="btn btn-primary" style="width:150px">Save Image</button>
+</div>
+
+
+{% endblock %}
+
+{% block javascript %} 
+
+<script src="/static/js/webcam3.js"></script>
+
+{% endblock %}
